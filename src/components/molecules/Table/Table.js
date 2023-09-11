@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-const Table = ({ keyTitle, title, keyList, list }) => {
+const Table = () => {
   const [currency, setCurrency] = useState([]);
-  const [baseCurrency, setBaseCurrency] = useState("USD");
+
   useEffect(() => {
     fetchExchageRates();
   }, []);
