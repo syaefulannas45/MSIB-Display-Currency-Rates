@@ -20,9 +20,9 @@ const Table = () => {
 
       const currencyRates = currencies.map((currency) => ({
         currency,
-        exchangeRate: parseFloat(rates[currency].toLocaleString("en-US", { style: "currency", currency: "USD" })).toFixed(4),
-        weBuy: parseFloat(rates[currency].toLocaleString("en-US", { style: "currency", currency: "USD" })).toFixed(4) * 1.05,
-        weSell: parseFloat(rates[currency].toLocaleString("en-US", { style: "currency", currency: "USD" })).toFixed(4) * 0.95,
+        exchangeRate: parseFloat(rates[currency]).toFixed(4).toLocaleString("en-US", { style: "currency", currency: "USD" }),
+        weBuy: parseFloat(rates[currency]).toFixed(4).toLocaleString("en-US", { style: "currency", currency: "USD" }) * 1.05,
+        weSell: parseFloat(rates[currency]).toFixed(4).toLocaleString("en-US", { style: "currency", currency: "USD" }) * 0.95,
       }));
       setCurrency(currencyRates);
     } catch (error) {
