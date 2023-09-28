@@ -33,3 +33,9 @@ tr:nth-child(even) {
 tr:hover {
   background-color: rgba(0, 0, 0, 0.3);
 }
+.desc {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

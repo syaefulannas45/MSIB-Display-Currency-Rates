@@ -15,43 +15,48 @@ const Table = () => {
       if (!res.ok) throw new Error("Failed to fetch");
 
       const data = await res.json();
-      const rates = data.rates;
 
-      const usdToBaseCurrency = 1 / parseFloat(rates.USD);
+      const rates = data.rates;
 
       const currencyRates = currencies.map((currency) => ({
         currency,
-        exchangeRate: usdToBaseCurrency * parseFloat(rates[currency]),
-        weBuy: usdToBaseCurrency * parseFloat(rates[currency]) * 1.05,
-        weSell: usdToBaseCurrency * parseFloat(rates[currency]) * 0.95,
+        exchangeRate: parseFloat(rates[currency].toLocaleString("en-US", { style: "currency", currency: "USD" })).toFixed(4),
+        weBuy: parseFloat(rates[currency].toLocaleString("en-US", { style: "currency", currency: "USD" })).toFixed(4) * 1.05,
+        weSell: parseFloat(rates[currency].toLocaleString("en-US", { style: "currency", currency: "USD" })).toFixed(4) * 0.95,
       }));
       setCurrency(currencyRates);
     } catch (error) {
       throw error;
     }
   };
-  console.log(currency);
+
   return (
-    <table>
-      <thead>
-        <tr>
-          <td>Currency</td>
-          <td>Exchange Rate</td>
-          <td>We Buy</td>
-          <td>We Sell</td>
-        </tr>
-      </thead>
-      <tbody>
-        {currency.map((item) => (
-          <tr key={item.currency}>
-            <td>{item.currency}</td>
-            <td>{item.exchangeRate.toFixed(4)}</td>
-            <td>{item.weBuy.toFixed(4)}</td>
-            <td>{item.weSell.toFixed(4)}</td>
+    <>
+      <table>
+        <thead>
+          <tr>
+            <td>Currency</td>
+            <td>Exchange Rate</td>
+            <td>We Buy</td>
+            <td>We Sell</td>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {currency.map((item) => (
+            <tr key={item.currency}>
+              <td>{item.currency}</td>
+              <td>{item.exchangeRate}</td>
+              <td>{item.weBuy}</td>
+              <td>{item.weSell}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="desc">
+        <p>Rates Are Based From 1 USD</p>
+        <p>This Application use API From https://currencyfreaks.com</p>
+      </div>
+    </>
   );
 };
 
